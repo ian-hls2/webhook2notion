@@ -32,13 +32,14 @@ def createTask(token, collectionURL, description):
     row.task = description
 
 
-def createVoicemail(token, collectionURL, title, description, attachments, date):
+def createVoicemail(token, collectionURL, title, description, phone, attachments, date):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.title = title
     row.description = description
+    row.phone = phone
     row.attachments = attachments
     row.date = date
 
@@ -77,11 +78,12 @@ def tasks():
 def voicemail():
     title = request.args.get('title')
     description = request.args.get('description')
+    phone = request.args.get('phone')
     attachments = request.args.get('attachments')
     date = request.args.get('date')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createVoicemail(token_v2, url, title, description, attachments, date)
+    createVoicemail(token_v2, url, title, description, phone, attachments, date)
     return f'added {title} voicemail to Notion'
 
 
