@@ -32,7 +32,7 @@ def createTask(token, collectionURL, description):
     row.task = description
 
 
-def createVoicemail(token, collectionURL, title, description, url, date):
+def createVoicemail(token, collectionURL, title, description, attachments, date):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
