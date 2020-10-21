@@ -14,14 +14,14 @@ def trackWeather(token, URL, weather):
     block.title = weather
 
 
-def createCheck(token, collectionURL, name, ref, nameOnCheck, amount, invoice, description, attachment):
+def createCheck(token, collectionURL, title, ref, name, amount, invoice, description, attachment):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.name = name
+    row.title = title
     row.ref = ref
-    row.nameOnCheck = nameOnCheck
+    row.name = name
     row.amount = amount
     row.invoice = invoice
     row.description = description
@@ -60,16 +60,16 @@ def createEmail(token, collectionURL, sender, subject, message_url):
 
 @app.route('/checks', methods=['GET'])
 def checks():
-    name = request.args.get('name')
+    title = request.args.get('title')
     ref = request.args.get('ref')
-    nameOnCheck = request.args.get('nameOnCheck')
+    name = request.args.get('name')
     amount = request.args.get('amount')
     invoice = request.args.get('invoice')
     description = request.args.get('description')
     attachment = request.args.get('attachment')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("CHECKSURL")
-    createCheck(token_v2, url, name, ref, nameOnCheck, amount, invoice, description, attachment)
+    createCheck(token_v2, url, title, ref, name, amount, invoice, description, attachment)
     return f'added {name} to Notion'
 
 
