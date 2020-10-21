@@ -14,14 +14,18 @@ def trackWeather(token, URL, weather):
     block.title = weather
 
 
-def createTweet(token, collectionURL, tweet, author, followers):
+def createCheck(token, collectionURL, name, ref, nameOnCheck, amount, invoice, description, attachment):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.tweet = tweet
-    row.author = author
-    row.followers = followers
+    row.name = name
+    row.ref = ref
+    row.nameOnCheck = nameOnCheck
+    row.amount = amount
+    row.invoice = invoice
+    row.description = description
+    row.attachment = attachment
 
 
 def createTask(token, collectionURL, description):
@@ -54,15 +58,19 @@ def createEmail(token, collectionURL, sender, subject, message_url):
     row.message_url = message_url
 
 
-@app.route('/twitter', methods=['GET'])
-def twitter():
-    tweet = request.args.get('tweet')
-    author = request.args.get('author')
-    followers = request.args.get('followers')
+@app.route('/checks', methods=['GET'])
+def checks():
+    name = request.args.get('name')
+    ref = request.args.get('ref')
+    nameOnCheck = request.args.get('nameOnCheck')
+    amount = request.args.get('amount')
+    invoice = request.args.get('invoice')
+    description = request.args.get('description')
+    attachment = request.args.get('attachment')
     token_v2 = os.environ.get("TOKEN")
-    url = os.environ.get("URL")
-    createTweet(token_v2, url, tweet, author, followers)
-    return f'added {tweet} to Notion'
+    url = os.environ.get("CHECKSURL")
+    createCheck(token_v2, url, name, ref, nameOnCheck, amount, invoice, description, attachment)
+    return f'added {name} to Notion'
 
 
 @app.route('/tasks', methods=['GET'])
@@ -82,7 +90,7 @@ def voicemail():
     attachments = request.args.get('attachments')
     date = request.args.get('date')
     token_v2 = os.environ.get("TOKEN")
-    url = os.environ.get("URL")
+    url = os.environ.get("VOICEMAILURL")
     createVoicemail(token_v2, url, title, description, phone, attachments, date)
     return f'added {title} voicemail to Notion'
 
