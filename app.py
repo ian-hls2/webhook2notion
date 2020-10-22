@@ -18,14 +18,14 @@ def createChecks(token, collectionURL, title, ref, name, amount, invoice, descri
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
-    row = cv.collection.add_row()
-    row.title = title
-    row.ref = ref
-    row.name = name
-    row.amount = amount
-    row.invoice = invoice
-    row.description = description
-    row.attachments = attachments
+    check = cv.collection.add_row()
+    check.title = title
+    check.ref = ref
+    check.name = name
+    check.amount = amount
+    check.invoice = invoice
+    check.description = description
+    check.attachments = attachments
 
 
 def createTask(token, collectionURL, description):
