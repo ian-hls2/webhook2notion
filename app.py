@@ -23,7 +23,8 @@ def createCheck(token, collectionURL, title, ref, name, amount, invoice, descrip
     row.ref = ref
     row.name = name
     row.amount = amount
-    row.attachments = attachments
+    row.invoice = invoice
+    row.description = description
 
 
 def createTask(token, collectionURL, description):
