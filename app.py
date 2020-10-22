@@ -22,8 +22,7 @@ def createCheck(token, collectionURL, title, ref, name, amount, invoice, descrip
     row.title = title
     row.ref = ref
     row.name = name
-    row.invoice = invoice
-    row.description = description
+    row.amount = amount
     row.attachments = attachments
 
 
