@@ -14,7 +14,7 @@ def trackWeather(token, URL, weather):
     block.title = weather
 
 
-def createCheck(token, collectionURL, title, ref, name, amount, invoice, description, attachments):
+def createChecks(token, collectionURL, title, ref, name, amount, invoice, description, attachments):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
@@ -69,8 +69,8 @@ def checks():
     attachments = request.args.get('attachments')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("CHECKSURL")
-    createCheck(token_v2, url, title, ref, name, amount, invoice, description, attachments)
-    return f'added {name} to Notion'
+    createChecks(token_v2, url, title, ref, name, amount, invoice, description, attachments)
+    return f'added {title} to Notion'
 
 
 @app.route('/tasks', methods=['GET'])
