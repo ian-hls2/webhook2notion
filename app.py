@@ -20,7 +20,7 @@ def createCheck(token, collectionURL, title, ref, name, amount, invoice, descrip
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.title = title
-    row.name = name
+    row.ref = ref
     row.amount = amount
     row.invoice = invoice
     row.description = description
