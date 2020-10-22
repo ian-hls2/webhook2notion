@@ -21,7 +21,7 @@ def createCheck(token, collectionURL, title, ref, name, amount, invoice, descrip
     row = cv.collection.add_row()
     row.title = title
     row.ref = ref
-    row.amount = amount
+    row.name = name
     row.invoice = invoice
     row.description = description
     row.attachments = attachments
