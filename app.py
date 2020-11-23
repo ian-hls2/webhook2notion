@@ -48,13 +48,15 @@ def createVoicemail(token, collectionURL, title, description, phone, attachments
     row.date = date
 
 
-def createEmail(token, collectionURL, sender, subject, message_url):
+def createEmail(token, collectionURL, sender, subject, body, attachments, message_url):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.sender = sender
     row.subject = subject
+    row.body = body
+    row.attachments = attachments
     row.message_url = message_url
 
 
@@ -99,10 +101,12 @@ def voicemail():
 def gmailUrgentEmail():
     sender = request.args.get('sender')
     subject = request.args.get('subject')
+    body = request.args.get('body')
+    attachments = request.args.get('attachments')
     message_url = request.args.get('url')
     token_v2 = os.environ.get("TOKEN")
-    url = os.environ.get("URL")
-    createEmail(token_v2, url, sender, subject, message_url)
+    url = os.environ.get("EMAILURL")
+    createEmail(token_v2, url, sender, subject, body, attachments, message_url)
     return f'added email from {sender} to Notion'
 
 @app.route('/getweather', methods=['GET'])
