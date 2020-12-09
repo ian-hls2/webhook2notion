@@ -103,7 +103,7 @@ def gmailUrgentEmail():
     subject = request.args.get('subject')
     body = request.args.get('body')
     attachments = request.args.get('attachments')
-    message_url = request.args.get('url')
+    message_url = request.args.get('messageurl')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("EMAILURL")
     createEmail(token_v2, url, sender, subject, body, attachments, message_url)
